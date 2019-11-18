@@ -20,7 +20,41 @@
         <!-- Plugins version -->
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
+
+        <calculator.version>1.0</calculator.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>sumAndSub</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>src/test/resources/sumAndSubTestSuite.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>multAndDiv</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>src/test/resources/multAndDivTestSuite.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>common</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>src/test/resources/commonTestSuite.xml</suite.file>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
@@ -36,6 +70,14 @@
             <version>${common.io.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.epam</groupId>
+            <artifactId>calculator</artifactId>
+            <version>${calculator.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/calculator-1.0.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
@@ -50,7 +92,19 @@
                     <encoding>${encoding.version}</encoding>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.plugin.version}</version>
+                <configuration>
+                    <reuseForks>false</reuseForks>
+                    <forkCount>0</forkCount>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suite.file}</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>

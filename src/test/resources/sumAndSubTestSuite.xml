@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Sum And Subtract Tests">
+
+    <test name="Sum test">
+        <classes>
+            <class name="hw1.CalculatorSumTest">
+                <methods>
+                    <include name="sumTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Subtract test">
+        <classes>
+            <class name="hw1.CalculatorSubtractTest">
+                <methods>
+                    <include name="subtractTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -1,17 +1,12 @@
 package hw2;
 
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 public class Exercise2Test extends AbstractBaseTest {
 
@@ -26,7 +21,7 @@ public class Exercise2Test extends AbstractBaseTest {
         driver.get("https://epam.github.io/JDI/index.html");
 
         // 2. Assert Browser title
-        assertEquals(driver.getTitle(), "Home Page");
+        softAssert.assertEquals(driver.getTitle(), "Home Page");
 
         // 3. Perform login
         driver.findElement(By.id("user-icon")).click();
@@ -36,9 +31,9 @@ public class Exercise2Test extends AbstractBaseTest {
         driver.findElement(By.id("login-button")).click();
 
         // 4. Asset User name
-        WebElement element = driver.findElement(By.xpath("//span[@id='user-name']"));
-        assertTrue(element.isDisplayed());
-        assertEquals(element.getText(), "PITER CHAILOVSKII");
+        WebElement userNameLabel = driver.findElement(By.xpath("//span[@id='user-name']"));
+        softAssert.assertTrue(userNameLabel.isDisplayed());
+        softAssert.assertEquals(userNameLabel.getText(), "PITER CHAILOVSKII");
 
         // 5. Click on "Service" subcategory in the header
         // and check that drop down contains options
@@ -46,29 +41,28 @@ public class Exercise2Test extends AbstractBaseTest {
                 "Simple Table", "Table with pages",
                 "Different elements");
         driver.findElement(By.xpath("//li[@class='dropdown']")).click();
-        WebElement element1 = driver.findElement(By.className("dropdown-menu"));
+        WebElement headerServiceDropdownMenu = driver.findElement(By.className("dropdown-menu"));
 
         expectedNames.forEach(expectedName -> {
-            WebElement elem = element1.findElement(By.linkText(expectedName.toUpperCase()));
-            softAssert.assertTrue(elem.isDisplayed());
+            WebElement headerItem = headerServiceDropdownMenu
+                    .findElement(By.linkText(expectedName.toUpperCase()));
+            softAssert.assertTrue(headerItem.isDisplayed());
         });
-        softAssert.assertAll();
 
         // 6. Click on Service subcategory in the left
         // section and check that drop down contains options
-        driver.findElement(By.xpath("//*[contains(@class, 'fa fa-caret-down arrow')]")).click();
-        WebElement element2 = driver.findElement(By.className("sub"));
+        driver.findElement(By.xpath("//div[contains(@class, 'fa-caret-down')]")).click();
+        WebElement subcategoryMenu = driver.findElement(By.className("sub"));
         expectedNames.forEach(expectedName -> {
-            WebElement elem = element2.findElement(By.linkText(expectedName));
-            softAssert.assertTrue(elem.isDisplayed());
+            WebElement subcategoryItem = subcategoryMenu.findElement(By.linkText(expectedName));
+            softAssert.assertTrue(subcategoryItem.isDisplayed());
         });
-        softAssert.assertAll();
 
         // 7. Open through the header menu Service -> Different Elements Page
         driver.findElement(By.xpath("//li[@class='dropdown']")).click();
-        element = driver.findElement(By.className("dropdown-menu"));
-        element.findElement(By.linkText("DIFFERENT ELEMENTS")).click();
-        assertEquals(driver.getCurrentUrl(), "https://epam.github.io/JDI/different-elements.html");
+        headerServiceDropdownMenu.findElement(By.linkText("DIFFERENT ELEMENTS")).click();
+        softAssert.assertEquals(driver.getCurrentUrl(),
+                "https://epam.github.io/JDI/different-elements.html");
 
         // 8. Check interface on Different elements
         // page, it contains all needed elements
@@ -76,147 +70,89 @@ public class Exercise2Test extends AbstractBaseTest {
         softAssert.assertEquals(checkboxCount, 4);
         int radioCount = driver.findElements(By.className("label-radio")).size();
         softAssert.assertEquals(radioCount, 4);
-        WebElement dropdown = driver.findElement(By.className("colors"));
-        softAssert.assertTrue(dropdown.isDisplayed());
-        WebElement button = driver.findElement(By.xpath("//button[@name='Default Button']"));
-        softAssert.assertTrue(button.isDisplayed());
-        button = driver.findElement(By.xpath("//input[@class='uui-button']"));
-        softAssert.assertTrue(button.isDisplayed());
-        softAssert.assertAll();
+        WebElement dropdownColorsMenu = driver.findElement(By.className("colors"));
+        softAssert.assertTrue(dropdownColorsMenu.isDisplayed());
+        WebElement firstFormButton = driver.findElement(By.xpath("//button[@name='Default Button']"));
+        softAssert.assertTrue(firstFormButton.isDisplayed());
+        WebElement secondFormButton = driver.findElement(By.xpath("//input[@class='uui-button']"));
+        softAssert.assertTrue(secondFormButton.isDisplayed());
 
         // 9. Assert that there is Right Section
-        element = driver.findElement(By.className("sidebar-menu"));
-        assertTrue(element.isDisplayed());
+        WebElement rightSectionMenu = driver.findElement(By.className("sidebar-menu"));
+        softAssert.assertTrue(rightSectionMenu.isDisplayed());
 
         // 10. Assert that there is Left Section
-        element = driver.findElement(By.name("log-sidebar"));
-        assertTrue(element.isDisplayed());
+        WebElement logSidebar = driver.findElement(By.name("log-sidebar"));
+        softAssert.assertTrue(logSidebar.isDisplayed());
 
         // Checkbox names for future tests
         List<String> checkboxNames = Arrays.asList("Water", "Wind");
 
         // 11. Select checkboxes: Water, Wind
-        driver.findElements(By.className("label-checkbox")).forEach( elem -> {
-            if (elem.getText().equals(checkboxNames.get(0)) || elem.getText().equals(checkboxNames.get(1))) {
-                WebElement box = elem.findElement(By.tagName("input"));
-                box.click();
-                softAssert.assertTrue(box.isSelected());
-            }
-        });
-        softAssert.assertAll();
+        WebElement waterCheckBox = driver.findElement(By.cssSelector(".label-checkbox:nth-of-type(1) input"));
+        WebElement windCheckBox = driver.findElement(By.cssSelector(".label-checkbox:nth-of-type(3) input"));
+        waterCheckBox.click();
+        windCheckBox.click();
+        softAssert.assertTrue(waterCheckBox.isSelected());
+        softAssert.assertTrue(windCheckBox.isSelected());
+
+        // Log list element for future tests
+        List<WebElement> logList = driver.findElements(By.cssSelector(".info-panel-section .logs li"));
 
         // 12. Assert that for each checkbox there is
         // an individual log row and value
         // is corresponded to the status of checkbox.
-
-        // Fist, get checkbox states
-        // state.get(0) - Water checkbox state
-        // state.get(1) - Wind checkbox state
-        // (we know that they are selected,
-        // just try to get this information
-        // from checkboxes directly)
-        List<String> states = new ArrayList<>();
-        driver.findElements(By.className("label-checkbox")).forEach( elem -> {
-            WebElement checkbox = elem.findElement(By.tagName("input"));
-            if (elem.getText().contains(checkboxNames.get(0))
-                    || elem.getText().contains(checkboxNames.get(1))) {
-                states.add(checkbox.isSelected() ? "true" : "false");
-            }
-        });
-
-        // Second, from information in logs
-        // check that all two checkboxes
-        // have right states
-        WebElement log = driver.findElement(By.xpath("//ul[@class='panel-body-list logs']"));
-        for (WebElement elem : log.findElements(By.tagName("li"))) {
-            boolean isWaterCheckbox = elem.getText().contains(checkboxNames.get(0));
-            boolean isWindCheckbox = elem.getText().contains(checkboxNames.get(1));
-
-            if (isWaterCheckbox || isWindCheckbox) {
-                softAssert.assertTrue(elem.getText().contains(states.get(isWaterCheckbox ? 0 : 1)));
-            }
-        }
-        softAssert.assertAll();
+        softAssert.assertTrue(logList.get(0).isDisplayed());
+        softAssert.assertTrue(logList.get(0).getText().contains("Wind: condition changed to true"));
+        softAssert.assertTrue(logList.get(1).isDisplayed());
+        softAssert.assertTrue(logList.get(1).getText().contains("Water: condition changed to true"));
 
         // 13. Select radio "Selen"
         String radioName = "Selen";
-        driver.findElements(By.className("label-radio")).forEach(elem -> {
-            if (elem.getText().equals(radioName)) {
-                WebElement radio = elem.findElement(By.tagName("input"));
-                radio.click();
-                assertTrue(radio.isSelected());
-            }
-        });
+        WebElement selenRadioButton = driver.findElement(By.cssSelector(".label-radio:nth-of-type(4) input"));
+        selenRadioButton.click();
+        softAssert.assertTrue(selenRadioButton.isSelected());
 
         // 14. Assert that for radiobutton there is
         // a log row and value is corresponded to
         // the status of radiobutton
-        boolean isRadioInLog = false;
-        //log = driver.findElement(By.xpath("//ul[@class='panel-body-list logs']"));
-        for (WebElement elem : log.findElements(By.tagName("li"))) {
-            if (elem.getText().contains(radioName)) {
-                assertTrue(elem.isDisplayed());
-                isRadioInLog = true;
-                break;
-            }
-        }
-        assertTrue(isRadioInLog);
+        logList = driver.findElements(By.cssSelector(".info-panel-section .logs li"));
+        softAssert.assertTrue(logList.get(0).isDisplayed());
+        softAssert.assertTrue(logList.get(0).getText().contains(radioName));
 
         // 15. Assert that for dropdown there is
         // a log row and value is corresponded
         // to the selected value.
         String selectedValue = "Yellow";
-        // open dropdown
-        dropdown.click();
-        Select select = new Select(driver.findElement(By.xpath("//select[@class='uui-form-element']")));
-        select.selectByVisibleText(selectedValue);
-        // close dropdown
-        dropdown.click();
-        assertEquals(select.getFirstSelectedOption().getText(), selectedValue);
+        dropdownColorsMenu.click();
+        Select dropdownSelector = new Select(driver
+                .findElement(By.xpath("//select[@class='uui-form-element']")));
+        dropdownSelector.selectByVisibleText(selectedValue);
+        dropdownColorsMenu.click();
+        softAssert.assertEquals(dropdownSelector.getFirstSelectedOption().getText(), selectedValue);
 
         // 16. Assert that for dropdown there
         // is a log row and value is corresponded
         // to the selected value.
-        boolean isSelectInLog = false;
-        for (WebElement elem : log.findElements(By.tagName("li"))) {
-            if (elem.getText().contains(selectedValue)) {
-                isSelectInLog = true;
-                break;
-            }
-        }
-        assertTrue(isSelectInLog);
+        logList = driver.findElements(By.cssSelector(".info-panel-section .logs li"));
+        softAssert.assertTrue(logList.get(0).isDisplayed());
+        softAssert.assertTrue(logList.get(0).getText().contains(selectedValue));
 
         // 17. Unselect and assert checkboxes (Water, Wind)
-        driver.findElements(By.className("label-checkbox")).forEach(elem -> {
-            if (elem.getText().contains(checkboxNames.get(0)) ||
-                    elem.getText().contains(checkboxNames.get(1))) {
-                elem.click();
-                softAssert.assertTrue(!elem.isSelected());
-            }
-        });
-        softAssert.assertAll();
+        waterCheckBox.click();
+        softAssert.assertTrue(!waterCheckBox.isSelected());
+        windCheckBox.click();
+        softAssert.assertTrue(!windCheckBox.isSelected());
 
         // 18. Assert that for each checkbox
         // there is an individual log row and
         // value is corresponded to the status of checkbox.
-        boolean isFirstWaterLog = true;
-        boolean isFirstWindLog = true;
-        for (WebElement elem : log.findElements(By.tagName("li"))) {
-            boolean isWaterCheckbox = elem.getText().contains(checkboxNames.get(0));
-            boolean isWindCheckbox = elem.getText().contains(checkboxNames.get(1));
+        logList = driver.findElements(By.cssSelector(".info-panel-section .logs li"));
+        softAssert.assertTrue(logList.get(0).isDisplayed());
+        softAssert.assertTrue(logList.get(0).getText().contains("Wind: condition changed to false"));
+        softAssert.assertTrue(logList.get(1).isDisplayed());
+        softAssert.assertTrue(logList.get(1).getText().contains("Water: condition changed to false"));
 
-            if ((isWaterCheckbox && isFirstWaterLog) || (isWindCheckbox && isFirstWindLog)) {
-                // "false" - state of checkboxes what they are unselected
-                softAssert.assertTrue(elem.getText().contains("false"));
-                if (isWaterCheckbox)
-                    isFirstWaterLog = false;
-                else
-                    isFirstWindLog = false;
-
-                if (!isFirstWaterLog && !isFirstWindLog)
-                    break;
-            }
-        }
         softAssert.assertAll();
     }
 }

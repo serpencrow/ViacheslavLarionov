@@ -1,6 +1,5 @@
 package hw2;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -29,9 +28,9 @@ public class Exercise1Test extends AbstractBaseTest {
         driver.findElement(By.id("login-button")).click();
 
         // 4. Asset User name
-        WebElement element = driver.findElement(By.xpath("//span[@id='user-name']"));
-        assertTrue(element.isDisplayed());
-        assertEquals(element.getText(), "PITER CHAILOVSKII");
+        WebElement userNameLabel = driver.findElement(By.xpath("//span[@id='user-name']"));
+        assertTrue(userNameLabel.isDisplayed());
+        assertEquals(userNameLabel.getText(), "PITER CHAILOVSKII");
 
         // 5. Assert browser title again
         assertEquals(driver.getTitle(), "Home Page");
@@ -40,26 +39,24 @@ public class Exercise1Test extends AbstractBaseTest {
         List<String> actualNames = new ArrayList<>();
         List<String> expectedNames = Arrays.asList("HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS");
         for (int i = 0; i < expectedNames.size(); ++i) {
-            WebElement element1 = driver.findElement(
-                    By.xpath("//ul[@class='uui-navigation nav navbar-nav m-l8']/li[" + (i + 1) + "]"));
-            assertTrue(element1.isDisplayed());
-            actualNames.add(element1.getText());
+            WebElement headerItem = driver.findElement(
+                    By.xpath("//ul[contains(@class, 'uui-navigation')]/li[" + (i + 1) + "]"));
+            assertTrue(headerItem.isDisplayed());
+            actualNames.add(headerItem.getText());
         }
         assertEquals(actualNames, expectedNames);
 
         // 7. Assert that there are 4 images on
         // the Index Page and they are displayed
-        element = driver.findElement(By.xpath("//span[@class='icons-benefit icon-practise']"));
-        assertTrue(element.isDisplayed());
-        element = driver.findElement(By.xpath("//span[@class='icons-benefit icon-custom']"));
-        assertTrue(element.isDisplayed());
-        element = driver.findElement(By.xpath("//span[@class='icons-benefit icon-multi']"));
-        assertTrue(element.isDisplayed());
-        element = driver.findElement(By.xpath("//span[@class='icons-benefit icon-base']"));
-        assertTrue(element.isDisplayed());
+        List<WebElement> images = driver.findElements(By.xpath("//span[contains(@class, 'icons-benefit')]"));
+        assertEquals(images.size(), 4);
+        images.forEach(image -> {
+            assertTrue(image.isDisplayed());
+        });
 
-        // 8. Assert that there are 4 images on
-        // the Index Page and they are displayed
+        // 8. Assert that there are 4 texts on
+        // the Index Page under icons and they
+        // have proper text
         List<String> expected = Arrays.asList(
                 "To include good practices\n" +
                 "and ideas from successful\n" +
@@ -72,13 +69,13 @@ public class Exercise1Test extends AbstractBaseTest {
                         "some external projects),\n" +
                         "wish to get more…"
         );
-        List<WebElement> elements = driver.findElements(By.className("benefit-txt"));
+        List<WebElement> textsUnderBenefitIcons = driver.findElements(By.className("benefit-txt"));
+        assertEquals(textsUnderBenefitIcons.size(), 4);
         List<String> actual = new ArrayList<>();
-        elements.forEach(part -> {
-            actual.add(part.getText());
+        textsUnderBenefitIcons.forEach(textUnderBenefitIcon -> {
+            assertTrue(textUnderBenefitIcon.isDisplayed());
+            actual.add(textUnderBenefitIcon.getText());
         });
-        for (WebElement elem : elements)
-            assertTrue(elem.isDisplayed());
         assertEquals(actual, expected);
 
         // 9. Assert a text of the main headers
@@ -90,42 +87,46 @@ public class Exercise1Test extends AbstractBaseTest {
                         "UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN REPREHENDERIT " +
                         "IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR."
         );
-        List<String> actualHeaders = Arrays.asList(
-                driver.findElement(By.name("main-title")).getText(),
-                driver.findElement(By.name("jdi-text")).getText()
+        List<WebElement> mainHeaders = Arrays.asList(
+                driver.findElement(By.name("main-title")),
+                driver.findElement(By.name("jdi-text"))
         );
-        assertEquals(actualHeaders, expectedHeaders);
+        assertTrue(mainHeaders.get(0).isDisplayed());
+        assertTrue(mainHeaders.get(1).isDisplayed());
+        assertEquals(mainHeaders.get(0).getText(), expectedHeaders.get(0));
+        assertEquals(mainHeaders.get(1).getText(), expectedHeaders.get(1));
 
         // 10. Assert that there is the iframe in the center of page
-        element = driver.findElement(By.xpath("//iframe[@id='iframe']"));
-        assertTrue(element.isDisplayed());
+        WebElement centeredIframe = driver.findElement(By.xpath("//iframe[@id='iframe']"));
+        assertTrue(centeredIframe.isDisplayed());
 
         // 11. Switch to the iframe and check that there
         // is Epam logo in the left top conner of iframe
         driver.switchTo().frame(driver.findElement(By.id("iframe")));
-        element = driver.findElement(By.xpath("//img[@id='epam_logo']"));
-        assertTrue(element.isDisplayed());
+        WebElement logo = driver.findElement(By.xpath("//img[@id='epam_logo']"));
+        assertTrue(logo.isDisplayed());
 
         // 12. Switch to original window back
         driver.switchTo().defaultContent();
         assertEquals(driver.getCurrentUrl(), "https://epam.github.io/JDI/index.html");
 
         // 13. Assert a text of the sub header
-        element = driver.findElement(By.xpath("//h3[@class='text-center']"));
-        assertTrue(element.isDisplayed());
-        assertEquals(element.getText(), "JDI GITHUB");
+        WebElement subHeaderTextField = driver.findElement(By.xpath("//h3[@class='text-center']"));
+        assertTrue(subHeaderTextField.isDisplayed());
+        assertEquals(subHeaderTextField.getText(), "JDI GITHUB");
 
         // 14. Assert that JDI GITHUB is a link and has a proper URL
-        element = driver.findElement(By.linkText("JDI GITHUB"));
-        assertEquals(element.getAttribute("href"), "https://github.com/epam/JDI");
+        WebElement subHeaderElement = driver.findElement(By.linkText("JDI GITHUB"));
+        assertTrue(subHeaderElement.isDisplayed());
+        assertEquals(subHeaderElement.getAttribute("href"), "https://github.com/epam/JDI");
 
         // 15. Assert that there is Left Section
-        element = driver.findElement(By.name("navigation-sidebar"));
-        assertTrue(element.isDisplayed());
+        WebElement navigationBar = driver.findElement(By.name("navigation-sidebar"));
+        assertTrue(navigationBar.isDisplayed());
 
         // 16. Assert that there is Footer
-        element = driver.findElement(By.className("footer-bg"));
-        assertTrue(element.isDisplayed());
+        WebElement footer = driver.findElement(By.className("footer-bg"));
+        assertTrue(footer.isDisplayed());
 
         // 17. Close Browser (in AbstractBaseTest class in tearDown() method)
     }

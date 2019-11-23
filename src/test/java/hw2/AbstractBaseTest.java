@@ -3,15 +3,16 @@ package hw2;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.util.concurrent.TimeUnit;
 
-public class AbstractBaseTest {
+public abstract class AbstractBaseTest {
+
     protected WebDriver driver;
 
-    @BeforeTest
+    @BeforeMethod
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -25,10 +26,10 @@ public class AbstractBaseTest {
         driver.manage().window().maximize();
     }
 
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
-        // using quit() instead of close() due to problem of closing webdriver
-        // in processes on Linux platform
+        // using quit() instead of close() due to problem
+        // of closing webdriver in processes on Linux platform
         driver.quit();
         driver = null;
     }

@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test All">
+
+    <suite-files>
+        <suite-file path="exercise1TestSuite.xml"/>
+        <suite-file path="exercise2TestSuite.xml"/>
+    </suite-files>
+</suite>

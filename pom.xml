@@ -85,6 +85,36 @@
                 <suite.file>src/test/resources/hw2/commonTestSuite.xml</suite.file>
             </properties>
         </profile>
+
+        <profile>
+            <id>exercise1Steps</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>src/test/resources/hw3/exercise1TestSuite.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>exercise2Steps</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>src/test/resources/hw3/exercise2TestSuite.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>common-steps</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>src/test/resources/hw3/commonTestSuite.xml</suite.file>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>

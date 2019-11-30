@@ -80,11 +80,11 @@ public class HomePage extends AbstractBasePage {
         return userNameLabel.getText();
     }
 
-    public boolean firstHeaderIsDisplayed() {
+    public boolean isFirstHeaderDisplayed() {
         return firstMainHeader.isDisplayed();
     }
 
-    public boolean secondHeaderIsDisplayed() {
+    public boolean isSecondHeaderDisplayed() {
         return secondMainHeader.isDisplayed();
     }
 
@@ -100,7 +100,7 @@ public class HomePage extends AbstractBasePage {
         return images.size();
     }
 
-    public boolean allImagesAreDisplayed() {
+    public boolean areAllImagesDisplayed() {
         boolean isDisplayed = true;
 
         for (WebElement image : images) {
@@ -113,7 +113,7 @@ public class HomePage extends AbstractBasePage {
         return imageTexts.size();
     }
 
-    public boolean allTextsUnderImagesAreDisplayed() {
+    public boolean areAllTextsUnderImagesDisplayed() {
         boolean isDisplayed = true;
         for (WebElement imageText : imageTexts) {
             isDisplayed &= imageText.isDisplayed();
@@ -129,7 +129,7 @@ public class HomePage extends AbstractBasePage {
         return textUnderImages;
     }
 
-    public boolean iframeIsDisplayed() {
+    public boolean isIframeDisplayed() {
         return iframe.isDisplayed();
     }
 
@@ -145,7 +145,7 @@ public class HomePage extends AbstractBasePage {
         driver.switchTo().defaultContent();
     }
 
-    public boolean subheaderIsDisplayed() {
+    public boolean isSubheaderDisplayed() {
         return subheaderTextField.isDisplayed();
     }
 
@@ -157,7 +157,7 @@ public class HomePage extends AbstractBasePage {
         return subHeaderLinkText.getAttribute("href");
     }
 
-    public boolean leftSectionIsDisplayed() {
+    public boolean isLeftSectionDisplayed() {
         return lefSection.isDisplayed();
     }
 }

@@ -50,7 +50,7 @@ public class DifferentElementsPage extends AbstractBasePage {
     }
 
     public boolean isButtonTypeDisplayed(final ButtonType buttonType, final String buttonName) {
-        List<WebElement> buttons = (buttonType.equals(ButtonType.CHECKBOX))
+        List<WebElement> buttons = (ButtonType.CHECKBOX.equals(buttonType))
                 ? checkboxes
                 : radioButtons;
 
@@ -63,28 +63,28 @@ public class DifferentElementsPage extends AbstractBasePage {
         return false;
     }
 
-    public boolean dropdownColorsIsDisplayed() {
+    public boolean isDropdownColorsDisplayed() {
         return dropdownColorMenu.isDisplayed();
     }
 
-    public boolean defaultButtonIsDisplayed() {
+    public boolean isDefaultButtonDisplayed() {
         return defaultButton.isDisplayed();
     }
 
-    public boolean buttonIsDisplayed() {
+    public boolean isButtonDisplayed() {
         return button.isDisplayed();
     }
 
-    public boolean leftSectionIsDisplayed() {
+    public boolean isLeftSectionDisplayed() {
         return leftSection.isDisplayed();
     }
 
-    public boolean rightSectionIsDisplayed() {
+    public boolean isRightSectionDisplayed() {
         return rightSection.isDisplayed();
     }
 
     public void selectButton(final ButtonType buttonType, final String buttonName) {
-        List<WebElement> buttons = (buttonType.equals(ButtonType.CHECKBOX))
+        List<WebElement> buttons = (ButtonType.CHECKBOX.equals(buttonType))
                 ? checkboxes
                 : radioButtons;
 
@@ -97,7 +97,7 @@ public class DifferentElementsPage extends AbstractBasePage {
         }
     }
 
-    public boolean checkboxIsSelected(final String checkboxName) {
+    public boolean isCheckboxSelected(final String checkboxName) {
         for (int i = 0; i < checkboxes.size(); ++i) {
             if (checkboxName
                     .equalsIgnoreCase(checkboxes.get(i).getText())) {
@@ -109,7 +109,7 @@ public class DifferentElementsPage extends AbstractBasePage {
         return false;
     }
 
-    public boolean radioButtonIsSelected(final String radioButtonName) {
+    public boolean isRadioButtonSelected(final String radioButtonName) {
         for (int i = 0; i < radioButtons.size(); ++i) {
             if (radioButtonName
                     .equalsIgnoreCase(radioButtons.get(i).getText())) {
@@ -121,7 +121,7 @@ public class DifferentElementsPage extends AbstractBasePage {
         return false;
     }
 
-    public boolean firstLogRowContains(final String logRow) {
+    public boolean isFirstLogRowContains(final String logRow) {
         return logSection.findElements(By.tagName("li")).get(0).getText().contains(logRow);
     }
 

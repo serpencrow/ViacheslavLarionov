@@ -21,7 +21,7 @@ public class Exercise1Steps extends BaseSteps {
 
     public void headerItemsShouldBeDisplayed() {
         assertTrue(homePage
-                .allMenuItemsInSectionAreDisplayed(MenuType.HEADER_MENU,
+                .areAllMenuItemsInSectionDisplayed(MenuType.HEADER_MENU,
                         MenuSection.MAIN_SECTION));
     }
 
@@ -31,7 +31,7 @@ public class Exercise1Steps extends BaseSteps {
 
     public void headerItemsShouldContain(final String itemName) {
         assertTrue(homePage
-                .itemContainsInMenuSection(MenuType.HEADER_MENU,
+                .isItemContainsInMenuSection(MenuType.HEADER_MENU,
                         MenuSection.MAIN_SECTION, itemName));
     }
 
@@ -40,7 +40,7 @@ public class Exercise1Steps extends BaseSteps {
     }
 
     public void homePageImagesShouldBeDisplayed() {
-        assertTrue(homePage.allImagesAreDisplayed());
+        assertTrue(homePage.areAllImagesDisplayed());
     }
 
     public void homePageTextsUnderImagesCountShouldBe(final int count) {
@@ -48,7 +48,7 @@ public class Exercise1Steps extends BaseSteps {
     }
 
     public void homePageTextsUnderImagesShouldBeDisplayed() {
-        assertTrue(homePage.allTextsUnderImagesAreDisplayed());
+        assertTrue(homePage.areAllTextsUnderImagesDisplayed());
     }
 
     public void homePageTextsUnderImagesShouldBe(final List<String> textsUnderImages) {
@@ -56,7 +56,7 @@ public class Exercise1Steps extends BaseSteps {
     }
 
     public void homePageFirstHeaderShouldBeDisplayed() {
-        assertTrue(homePage.firstHeaderIsDisplayed());
+        assertTrue(homePage.isFirstHeaderDisplayed());
     }
 
     public void homePageFirstHeaderShouldBe(final String headerName) {
@@ -64,7 +64,7 @@ public class Exercise1Steps extends BaseSteps {
     }
 
     public void homePageSecondHeaderShouldBeDisplayed() {
-        assertTrue(homePage.secondHeaderIsDisplayed());
+        assertTrue(homePage.isSecondHeaderDisplayed());
     }
 
     public void homePageSecondHeaderShouldBe(final String headerName) {
@@ -72,7 +72,7 @@ public class Exercise1Steps extends BaseSteps {
     }
 
     public void homePageIframeShouldBeDisplayed() {
-        assertTrue(homePage.iframeIsDisplayed());
+        assertTrue(homePage.isIframeDisplayed());
     }
 
     public void homePageSwitchToIframe() {
@@ -92,7 +92,7 @@ public class Exercise1Steps extends BaseSteps {
     }
 
     public void homePageSubHeaderTextShouldBeDisplayed() {
-        assertTrue(homePage.subheaderIsDisplayed());
+        assertTrue(homePage.isSubheaderDisplayed());
     }
 
     public void homePageSubHeaderTextShouldBe(final String subheaderText) {
@@ -104,10 +104,10 @@ public class Exercise1Steps extends BaseSteps {
     }
 
     public void homePageLeftSectionShouldBeDisplayed() {
-        assertTrue(homePage.leftSectionIsDisplayed());
+        assertTrue(homePage.isLeftSectionDisplayed());
     }
 
     public void homePageFooterShouldBeDisplayed() {
-        assertTrue(homePage.footerIsDisplayed());
+        assertTrue(homePage.isFooterDisplayed());
     }
 }

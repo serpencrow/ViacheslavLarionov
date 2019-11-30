@@ -40,11 +40,11 @@ public abstract class AbstractBasePage {
         return headerMenu.getHeaderItemsCount();
     }
 
-    public boolean allMenuItemsInSectionAreDisplayed(final MenuType menuType,
+    public boolean areAllMenuItemsInSectionDisplayed(final MenuType menuType,
                                                      final MenuSection menuSection) {
         return (menuType.equals(MenuType.HEADER_MENU))
-                ? headerMenu.isAllMenuItemsDisplayed(menuSection)
-                : leftSideMenu.isAllMenuItemsDisplayed(menuSection);
+                ? headerMenu.areAllMenuItemsDisplayed(menuSection)
+                : leftSideMenu.areAllMenuItemsDisplayed(menuSection);
     }
 
     public void clickOnItemInMenuSection(final MenuType menuType, final MenuSection menuSection,
@@ -60,14 +60,14 @@ public abstract class AbstractBasePage {
         }
     }
 
-    public boolean itemContainsInMenuSection(final MenuType menuType, final MenuSection menuSection,
-                                             final String itemName) {
+    public boolean isItemContainsInMenuSection(final MenuType menuType, final MenuSection menuSection,
+                                               final String itemName) {
         return (menuType.equals(MenuType.HEADER_MENU))
                 ? headerMenu.isMenuContainsItem(menuSection, itemName)
                 : leftSideMenu.isMenuContainsItem(menuSection, itemName);
     }
 
-    public boolean footerIsDisplayed() {
+    public boolean isFooterDisplayed() {
         return footer.isDisplayed();
     }
 }

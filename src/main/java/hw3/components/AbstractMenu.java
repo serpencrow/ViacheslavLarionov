@@ -37,7 +37,7 @@ public abstract class AbstractMenu {
         return false;
     }
 
-    public boolean isAllMenuItemsDisplayed(final MenuSection menuSection) {
+    public boolean areAllMenuItemsDisplayed(final MenuSection menuSection) {
         for (WebElement menuItem : getMenuItemsInSection(menuSection)) {
             if (!"".equals(menuItem.getText())
                     && !menuItem.isDisplayed()) {

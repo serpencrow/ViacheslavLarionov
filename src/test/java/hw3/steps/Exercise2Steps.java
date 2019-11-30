@@ -25,13 +25,13 @@ public class Exercise2Steps extends BaseSteps {
     }
 
     public void serviceDropdownShouldBeDisplayedInMenu(MenuType menuType) {
-        assertTrue(homePage.allMenuItemsInSectionAreDisplayed(menuType, MenuSection.SERVICE_SECTION));
+        assertTrue(homePage.areAllMenuItemsInSectionDisplayed(menuType, MenuSection.SERVICE_SECTION));
     }
 
     public void serviceSubcategoriesShouldContainOptionsInMenu(final MenuType menuType,
                                                                final List<String> options) {
         options.forEach(option -> assertTrue(homePage
-                .itemContainsInMenuSection(menuType, MenuSection.SERVICE_SECTION, option)));
+                .isItemContainsInMenuSection(menuType, MenuSection.SERVICE_SECTION, option)));
     }
 
     public void currentUrlPageShouldBe(final String currentURL) {
@@ -57,23 +57,23 @@ public class Exercise2Steps extends BaseSteps {
     }
 
     public void dropdownShouldBeDisplayed() {
-        assertTrue(differentElementsPage.dropdownColorsIsDisplayed());
+        assertTrue(differentElementsPage.isDropdownColorsDisplayed());
     }
 
     public void defaultButtonShouldBeDisplayed() {
-        assertTrue(differentElementsPage.defaultButtonIsDisplayed());
+        assertTrue(differentElementsPage.isDefaultButtonDisplayed());
     }
 
     public void buttonShouldBeDisplayed() {
-        assertTrue(differentElementsPage.buttonIsDisplayed());
+        assertTrue(differentElementsPage.isButtonDisplayed());
     }
 
     public void rightSectionShouldBe() {
-        assertTrue(differentElementsPage.rightSectionIsDisplayed());
+        assertTrue(differentElementsPage.isRightSectionDisplayed());
     }
 
     public void leftSectionShouldBe() {
-        assertTrue(differentElementsPage.leftSectionIsDisplayed());
+        assertTrue(differentElementsPage.isLeftSectionDisplayed());
     }
 
     public void selectCheckbox(final String checkboxName) {
@@ -85,20 +85,20 @@ public class Exercise2Steps extends BaseSteps {
     }
 
     public void checkboxShouldBeSelected(final String checkboxName) {
-        assertTrue(differentElementsPage.checkboxIsSelected(checkboxName));
+        assertTrue(differentElementsPage.isCheckboxSelected(checkboxName));
     }
 
     public void checkboxShouldBeUnselected(final String checkboxName) {
-        assertFalse(differentElementsPage.checkboxIsSelected(checkboxName));
+        assertFalse(differentElementsPage.isCheckboxSelected(checkboxName));
     }
 
 
     public void radioButtonShouldBeSelected(final String radioButtonName) {
-        assertTrue(differentElementsPage.radioButtonIsSelected(radioButtonName));
+        assertTrue(differentElementsPage.isRadioButtonSelected(radioButtonName));
     }
 
     public void logRowShouldBeExists(final String logRow) {
-        assertTrue(differentElementsPage.firstLogRowContains(logRow));
+        assertTrue(differentElementsPage.isFirstLogRowContains(logRow));
     }
 
     public void clickOnDropdownColorsMenu() {
@@ -115,6 +115,6 @@ public class Exercise2Steps extends BaseSteps {
 
     public void chosenCheckboxesShouldBeUnselected(final List<String> checkboxNames) {
         checkboxNames.forEach(checkboxName ->
-                assertFalse(differentElementsPage.checkboxIsSelected(checkboxName)));
+                assertFalse(differentElementsPage.isCheckboxSelected(checkboxName)));
     }
 }

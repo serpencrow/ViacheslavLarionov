@@ -63,23 +63,23 @@ public class DifferentElementsPage extends AbstractBasePage {
         return false;
     }
 
-    public boolean isDropdownColorsDisplayed() {
+    public boolean dropdownColorsIsDisplayed() {
         return dropdownColorMenu.isDisplayed();
     }
 
-    public boolean isDefaultButtonDisplayed() {
+    public boolean defaultButtonIsDisplayed() {
         return defaultButton.isDisplayed();
     }
 
-    public boolean isButtonDisplayed() {
+    public boolean buttonIsDisplayed() {
         return button.isDisplayed();
     }
 
-    public boolean isLeftSectionDisplayed() {
+    public boolean leftSectionIsDisplayed() {
         return leftSection.isDisplayed();
     }
 
-    public boolean isRightSectionDisplayed() {
+    public boolean rightSectionIsDisplayed() {
         return rightSection.isDisplayed();
     }
 
@@ -97,7 +97,7 @@ public class DifferentElementsPage extends AbstractBasePage {
         }
     }
 
-    public boolean isCheckboxSelected(final String checkboxName) {
+    public boolean checkboxIsSelected(final String checkboxName) {
         for (int i = 0; i < checkboxes.size(); ++i) {
             if (checkboxName
                     .equalsIgnoreCase(checkboxes.get(i).getText())) {
@@ -109,7 +109,7 @@ public class DifferentElementsPage extends AbstractBasePage {
         return false;
     }
 
-    public boolean isRadioButtonSelected(final String radioButtonName) {
+    public boolean radioButtonIsSelected(final String radioButtonName) {
         for (int i = 0; i < radioButtons.size(); ++i) {
             if (radioButtonName
                     .equalsIgnoreCase(radioButtons.get(i).getText())) {
@@ -121,7 +121,7 @@ public class DifferentElementsPage extends AbstractBasePage {
         return false;
     }
 
-    public boolean isFirstLogRowContains(final String logRow) {
+    public boolean firstLogRowContains(final String logRow) {
         return logSection.findElements(By.tagName("li")).get(0).getText().contains(logRow);
     }
 

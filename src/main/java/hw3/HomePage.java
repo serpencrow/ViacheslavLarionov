@@ -72,7 +72,7 @@ public class HomePage extends AbstractBasePage {
         loginButton.click();
     }
 
-    public boolean isUsernameLabelDisplayed() {
+    public boolean usernameLabelIsDisplayed() {
         return userNameLabel.isDisplayed();
     }
 
@@ -80,11 +80,11 @@ public class HomePage extends AbstractBasePage {
         return userNameLabel.getText();
     }
 
-    public boolean isFirstHeaderDisplayed() {
+    public boolean firstHeaderIsDisplayed() {
         return firstMainHeader.isDisplayed();
     }
 
-    public boolean isSecondHeaderDisplayed() {
+    public boolean secondHeaderIsDisplayed() {
         return secondMainHeader.isDisplayed();
     }
 
@@ -100,7 +100,7 @@ public class HomePage extends AbstractBasePage {
         return images.size();
     }
 
-    public boolean isAllImagesDisplayed() {
+    public boolean allImagesAreDisplayed() {
         boolean isDisplayed = true;
 
         for (WebElement image : images) {
@@ -113,7 +113,7 @@ public class HomePage extends AbstractBasePage {
         return imageTexts.size();
     }
 
-    public boolean isAllTextsUnderImagesDisplayed() {
+    public boolean allTextsUnderImagesAreDisplayed() {
         boolean isDisplayed = true;
         for (WebElement imageText : imageTexts) {
             isDisplayed &= imageText.isDisplayed();
@@ -129,7 +129,7 @@ public class HomePage extends AbstractBasePage {
         return textUnderImages;
     }
 
-    public boolean isIframeDisplayed() {
+    public boolean iframeIsDisplayed() {
         return iframe.isDisplayed();
     }
 
@@ -145,7 +145,7 @@ public class HomePage extends AbstractBasePage {
         driver.switchTo().defaultContent();
     }
 
-    public boolean isSubheaderDisplayed() {
+    public boolean subheaderIsDisplayed() {
         return subheaderTextField.isDisplayed();
     }
 
@@ -157,7 +157,7 @@ public class HomePage extends AbstractBasePage {
         return subHeaderLinkText.getAttribute("href");
     }
 
-    public boolean isLeftSectionDisplayed() {
+    public boolean leftSectionIsDisplayed() {
         return lefSection.isDisplayed();
     }
 }

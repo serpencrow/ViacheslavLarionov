@@ -26,7 +26,7 @@ public abstract class BaseSteps {
     }
 
     public void usernameOnTheHomePageShouldBeDisplayed() {
-        assertTrue(homePage.isUsernameLabelDisplayed());
+        assertTrue(homePage.usernameLabelIsDisplayed());
     }
 
     public void usernameOnTheHomePageShouldBe(final String username) {

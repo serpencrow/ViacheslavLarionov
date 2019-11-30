@@ -19,6 +19,8 @@
         <calculator.version>1.0</calculator.version>
         <selenium.version>3.141.59</selenium.version>
         <webdrivermanager.version>3.7.1</webdrivermanager.version>
+        <selenide.version>5.5.0</selenide.version>
+        <common-collections.version>4.0</common-collections.version>
 
         <!-- Plugins version -->
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
@@ -115,6 +117,36 @@
                 <suite.file>src/test/resources/hw3/commonTestSuite.xml</suite.file>
             </properties>
         </profile>
+
+        <profile>
+            <id>selenide-test1</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>src/test/resources/hw4/exercise1TestSuite.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>selenide-test2</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>src/test/resources/hw4/exercise2TestSuite.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>common-selenide</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>src/test/resources/hw4/commonTestSuite.xml</suite.file>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>
@@ -130,6 +162,12 @@
             <artifactId>commons-io</artifactId>
             <version>${common.io.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${common-collections.version}</version>
         </dependency>
 
         <dependency>
@@ -150,6 +188,12 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
         </dependency>
     </dependencies>
 

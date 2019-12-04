@@ -2,18 +2,12 @@ package hw4.ex2;
 
 import hw4.AbstractBaseTest;
 import hw4.Constants;
-import hw4.Utils;
-import hw4.ex2.enums.*;
-import org.apache.commons.collections4.CollectionUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.rmi.CORBA.Util;
-import java.util.Arrays;
 import java.util.List;
 
 import static hw4.Utils.*;
-import static org.testng.Assert.assertTrue;
 
 public class Exercise2StepsTest extends AbstractBaseTest {
 

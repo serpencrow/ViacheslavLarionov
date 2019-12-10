@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Different Element Page test">
+
+    <test name="Cucumber Common Test">
+        <classes>
+            <class name="hw6.RunFeatures"/>
+        </classes>
+    </test>
+</suite>

@@ -44,20 +44,8 @@ public class Utils {
         }
 
         if (isNotEmpty(formData.getElements())) {
-            StringBuilder builder = new StringBuilder("Elements: ");
-            AtomicInteger elementsCount = new AtomicInteger(formData.getElements().size());
-
-            for (String element : formData.getElements()) {
-                builder.append(element);
-
-                if (elementsCount.get() != 1) {
-                    builder.append(", ");
-                }
-
-                elementsCount.decrementAndGet();
-            }
-
-            expectedLogList.add(builder.toString());
+            String elementsList = String.join(", ", formData.getElements());
+            expectedLogList.add(String.join(" ", "Elements:", elementsList));
         }
 
         if (formData.getColor() != null) {
@@ -69,20 +57,8 @@ public class Utils {
         }
 
         if (isNotEmpty(formData.getVegetables())) {
-            StringBuilder builder = new StringBuilder("Vegetables: ");
-            AtomicInteger vegetablesCount = new AtomicInteger(formData.getVegetables().size());
-
-            for (String vegetable : formData.getVegetables()) {
-                builder.append(vegetable);
-
-                if (vegetablesCount.get() != 1) {
-                    builder.append(", ");
-                }
-
-                vegetablesCount.decrementAndGet();
-            }
-
-            expectedLogList.add(builder.toString());
+            String vegetablesList = String.join(", ", formData.getVegetables());
+            expectedLogList.add(String.join(" ", "Vegetables:", vegetablesList));
         }
 
         return expectedLogList;

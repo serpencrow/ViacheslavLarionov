@@ -26,6 +26,7 @@
         <jakson-annotations.version>2.9.9</jakson-annotations.version>
         <aspectj.version>1.8.10</aspectj.version>
         <cucumber.version>1.2.5</cucumber.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
 
         <!-- Plugins version -->
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
@@ -176,10 +177,20 @@
         <profile>
             <id>cucumber-common</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <suite.file>src/test/resources/hw6/commonTestSuite.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>jdi</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>src/test/resources/hw_jdi/commonTestSuite.xml</suite.file>
             </properties>
         </profile>
     </profiles>
@@ -248,9 +259,27 @@
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
+        <testResources>
+            <testResource>
+                <filtering>true</filtering>
+                <directory>src/test/resources/hw_jdi</directory>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

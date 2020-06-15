@@ -20,7 +20,7 @@
         <selenium.version>3.141.59</selenium.version>
         <webdrivermanager.version>3.7.1</webdrivermanager.version>
         <selenide.version>5.5.0</selenide.version>
-        <common-collections.version>4.0</common-collections.version>
+        <common-collections.version>4.1</common-collections.version>
         <allure.version>2.13.0</allure.version>
         <allure.maven.plugin.version>2.10.0</allure.maven.plugin.version>
         <jakson-annotations.version>2.9.9</jakson-annotations.version>
